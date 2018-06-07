@@ -1,0 +1,93 @@
+.rvt-switch {
+  align-items: center;
+  background: none;
+  background-color: $color-black--200;
+  border: $xxs/2 solid $color-black--300;
+  border-radius: $xxs;
+  display: flex;
+  font-weight: 700;
+  height: $xl;
+  line-height: 1.1;
+  padding: $xxs;
+  position: relative;
+  -webkit-appearance: none;
+
+  &:after {
+    background-color: $color-background;
+    border-radius: $xxs;
+    content: " ";
+    height: $md + $xxs;
+    left: $xxs;
+    position: absolute;
+    top: $xxs;
+    transition: transform .2s ease;
+    width: $lg + $xxs;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 $xxs/2 $color-background, 0 0 0 $xxs $color-action;
+    outline: none;
+    transition: box-shadow .2s ease;
+  }
+
+  &[aria-checked="true"] {
+    background-color: $color-action;
+    border-color: $color-action;
+    color: $color-background;
+  }
+
+  &[aria-checked="true"]:after {
+    transform: translate($xl + $xxs, 0);
+  }
+
+  &__on,
+  &__off {
+    border-radius: $xxs;
+    padding: ($xxs + .15) $xs;
+    transition: all .2s ease;
+  }
+
+  &[aria-checked="true"] &__off {
+    visibility: hidden;
+  }
+
+  &[aria-checked="false"] &__on {
+    visibility: hidden;
+  }
+
+  &--danger[aria-checked="true"] {
+    background-color: $color-alert-orange;
+    border-color: $color-alert-orange;
+  }
+
+  &--success[aria-checked="true"] {
+    background-color: $color-alert-green;
+    border-color: $color-alert-green;
+  }
+
+  &--small {
+    height: $md;
+    padding: $xxs/2;
+
+    &:after {
+      height: $sm;
+      left: $xxs/2;
+      top: $xxs/2;
+      width: $md;
+    }
+
+    &[aria-checked="true"]:after {
+      /**
+       * NOTE: This is a magic number to make spacing around the small switch
+       * "handle" appear optically the same on all sides.
+       */
+      transform: translate($lg + .1rem, 0);
+    }
+  }
+
+  &--small &__on,
+  &--small &__off {
+    font-size: $ts-14;
+    padding: $xxs/2 $xxs;
+  }
+}
