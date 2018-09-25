@@ -1,10 +1,15 @@
 {
   "name": "rivet-switch",
-  "version": "0.1.1-alpha",
+  "version": "0.1.1",
   "description": "An accessible switch component for Rivet",
+  "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
     "url": "https://github.com/indiana-university/rivet-switch"
+  },
+  "bugs": {
+    "url": "https://github.com/indiana-university/rivet-switch/issues",
+    "email": "rivet@iu.edu"
   },
   "main": "dist/js/rivet-switch.js",
   "scripts": {
@@ -12,9 +17,8 @@
     "build": "gulp release"
   },
   "author": "Indiana University",
-  "license": "Apache-2.0",
   "dependencies": {
-    "rivet-uits": "^1.0.0"
+    "rivet-uits": "^1.1.0-alpha.2"
   },
   "devDependencies": {
     "autoprefixer": "^8.5.0",
