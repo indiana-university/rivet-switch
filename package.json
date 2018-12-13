@@ -1,6 +1,6 @@
 {
   "name": "rivet-switch",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "An accessible switch component for Rivet",
   "license": "BSD-3-Clause",
   "repository": {
@@ -17,9 +17,6 @@
     "build": "gulp release"
   },
   "author": "Indiana University",
-  "dependencies": {
-    "rivet-uits": "^1.1.0-alpha.2"
-  },
   "devDependencies": {
     "autoprefixer": "^8.5.0",
     "browser-sync": "^2.24.4",
@@ -32,6 +29,7 @@
     "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.0",
     "pump": "^3.0.0",
+    "rivet-uits": "^1.1.0",
     "run-sequence": "^2.2.1"
   }
 }

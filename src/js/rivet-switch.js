@@ -1,3 +1,7 @@
+/**
+ * Copyright (C) [year of first publication] The Trustees of Indiana University
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define([], function () {
