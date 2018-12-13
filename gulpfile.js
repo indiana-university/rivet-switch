@@ -114,10 +114,6 @@ gulp.task('js:minify', function (done) {
 });
 
 gulp.task('js:header', function () {
-  gulp.src('dist/js/' + package.name + '.js')
-    .pipe(header(banner, { package: package }))
-    .pipe(gulp.dest('dist/js/'));
-
   gulp.src('dist/js/' + package.name + '.min.js')
     .pipe(header(banner, { package: package }))
     .pipe(gulp.dest('dist/js/'));
