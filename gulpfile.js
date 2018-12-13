@@ -13,12 +13,13 @@ const del = require('del');
 const package = require('./package.json');
 
 const banner = `/*!
- * ${package.name} - @version ${package.version}
  *
  * Copyright (C) 2018 The Trustees of Indiana University
  * SPDX-License-Identifier: BSD-3-Clause
 
-*/
+ * ${package.name} - @version ${package.version}
+ */
+
 `;
 
 // Development server
@@ -114,7 +115,13 @@ gulp.task('js:minify', function (done) {
 });
 
 gulp.task('js:header', function () {
-  gulp.src('dist/js/' + package.name + '.min.js')
+  gulp
+    .src('dist/js/' + package.name + '.js')
+    .pipe(header(banner, { package: package }))
+    .pipe(gulp.dest('dist/js/'));
+
+  gulp
+    .src('dist/js/' + package.name + '.min.js')
     .pipe(header(banner, { package: package }))
     .pipe(gulp.dest('dist/js/'));
 });
