@@ -1,3 +1,7 @@
+/**
+ * Copyright (C) 2018 The Trustees of Indiana University
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define([], function () {
@@ -46,7 +50,7 @@
     }
   }
 
-  const switchOff = function(switchButton, callback) {
+  var switchOff = function(switchButton, callback) {
     switchButton.setAttribute('aria-checked', 'false');
 
     _fireCustomEvent(switchButton, 'switchOff');
