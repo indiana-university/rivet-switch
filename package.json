@@ -14,7 +14,8 @@
   "main": "dist/js/rivet-switch.js",
   "scripts": {
     "start": "gulp",
-    "build": "gulp release"
+    "build": "gulp release",
+    "prepublishOnly": "npm run build"
   },
   "author": "Indiana University",
   "devDependencies": {
