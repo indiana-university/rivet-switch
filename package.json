@@ -14,6 +14,7 @@
   "main": "dist/js/rivet-switch.js",
   "scripts": {
     "start": "gulp",
+    "headless": "gulp headless",
     "build": "gulp release",
     "test": "cypress run --spec cypress/integration/switch_spec.js",
     "cypress:open": "cypress open"

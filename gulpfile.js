@@ -29,8 +29,23 @@ function watchFiles(callback) {
     }
   });
   watch("src/sass/**/*.scss", { ignoreInitial: false }, compileSass);
-  watch("src/js/**/*.js", compileJS);
-  watch("src/index.html", compileHTML);
+  watch("src/js/**/*.js", { ignoreInitial: false }, compileJS);
+  watch("src/index.html", { ignoreInitial: false }, compileHTML);
+
+  callback();
+}
+
+// Headless development server
+function headless(callback) {
+  browserSync.init({
+    server: {
+      baseDir: "./docs"
+    },
+    open: false
+  });
+  watch("src/sass/**/*.scss", { ignoreInitial: false }, compileSass);
+  watch("src/js/**/*.js", { ignoreInitial: false }, compileJS);
+  watch("src/index.html", { ignoreInitial: false }, compileHTML);
 
   callback();
 }
@@ -142,6 +157,8 @@ exports.release = series(
   minifyJS,
   headerJS
 );
+
+exports.headless = headless;
 
 // Default dev server
 exports.default = watchFiles;
