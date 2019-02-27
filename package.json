@@ -17,7 +17,8 @@
     "headless": "gulp headless",
     "build": "gulp release",
     "test": "cypress run --spec cypress/integration/switch_spec.js",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "prepublishOnly": "npm run build"
   },
   "author": "Indiana University",
   "devDependencies": {
