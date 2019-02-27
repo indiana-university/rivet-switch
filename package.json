@@ -14,12 +14,16 @@
   "main": "dist/js/rivet-switch.js",
   "scripts": {
     "start": "gulp",
-    "build": "gulp release"
+    "headless": "gulp headless",
+    "build": "gulp release",
+    "test": "cypress run --spec cypress/integration/switch_spec.js",
+    "cypress:open": "cypress open"
   },
   "author": "Indiana University",
   "devDependencies": {
     "autoprefixer": "^8.5.0",
     "browser-sync": "^2.26.3",
+    "cypress": "^3.1.5",
     "del": "^3.0.0",
     "gulp": "^4.0.0",
     "gulp-cssnano": "^2.1.3",
