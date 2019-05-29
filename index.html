@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<!--
+Copyright (C) 2018 The Trustees of Indiana University
+SPDX-License-Identifier: BSD-3-Clause
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Rivet Switch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://assets.uits.iu.edu/css/rivet/1.1.0/rivet.min.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/rivet-switch.css"/>
+  <style>
+    /* Demo styles */
+    body {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+
+    code {
+      background-color: #f7f7f7;
+      display: inline-block;
+      padding: .05rem .15rem;
+      border-radius: 3px;
+      color: #d14;
+    }
+
+    .rvt-plain-list li {
+      margin: 0;
+    }
+
+    .rvt-switch-demo {
+      padding: 1.5rem .5rem;
+      border-top: 1px solid #eee;
+    }
+
+    .rvt-switch-demo .rvt-switch {
+      margin-left: auto;
+    }
+  </style>
+</head>
+<body>
+  <main class="rvt-container rvt-container--sophomore rvt-container--center" id="wrapper">
+    <h1 class="rvt-ts-36 rvt-lh-title rvt-text-bold">Rivet Switch</h1>
+    <p class="rvt-ts-23 rvt-m-bottom-sm rvt-m-top-xxs rvt-lh-title">An accessible switch component for Rivet</p>
+
+    <div class="rvt-repo-info">
+      <a href="./">Switch source on Github</a>
+    </div>
+
+    <h2 class="rvt ts-20 rvt-text-bold rvt-m-top-xxl">Default switches</h2>
+    <ul class="rvt-plain-list rvt-m-top-md">
+      <li>
+        <div class="rvt-display-flex rvt-vertical-center rvt-switch-demo">
+          <span class="rvt-m-right-lg" id="email-label"><strong>Email</strong> notification</span>
+          <button
+            class="rvt-switch"
+            data-switch="email-switch"
+            role="switch"
+            aria-checked="false"
+            aria-labelledby="email-label"
+          >
+          <span id="default-switch-on"class="rvt-switch__on">On</span>
+          <span id="default-switch-off" class="rvt-switch__off">Off</span>
+          </button>
+        </div>
+      </li>
+      <li>
+        <div class="rvt-display-flex rvt-vertical-center rvt-switch-demo">
+          <div class="rvt-m-right-lg" id="two-factor-label">
+            <strong>Two-factor</strong> authentication <a href="#" class="rvt-ts-14">What is this?</a>
+          </div>
+          <button
+            class="rvt-switch rvt-switch--success"
+            data-switch="two-factor-switch"
+            role="switch"
+            aria-checked="true"
+            aria-labelledby="two-factor-label"
+          >
+          <span id="duo-switch-on" class="rvt-switch__on">On</span>
+          <span id="duo-switch-off" class="rvt-switch__off">Off</span>
+          </button>
+        </div>
+      </li>
+      <li>
+        <div class="rvt-display-flex rvt-vertical-center rvt-switch-demo">
+          <div class="rvt-m-right-lg" id="location-label">
+            Use my location
+          </div>
+          <button
+            class="rvt-switch rvt-switch--danger"
+            data-switch="location-switch"
+            role="switch"
+            aria-checked="true"
+            aria-labelledby="location-label"
+          >
+          <span class="rvt-switch__on">On</span>
+          <span class="rvt-switch__off">Off</span>
+          </button>
+        </div>
+      </li>
+    </ul>
+
+    <h2 class="rvt ts-20 rvt-text-bold rvt-m-top-xxl">Small switches</h2>
+
+    <ul class="rvt-plain-list rvt-m-top-xxl">
+      <li>
+        <div class="rvt-display-flex rvt-vertical-center rvt-switch-demo">
+          <span class="rvt-m-right-lg" id="small-1-label">
+            <strong>Small email</strong> notification
+          </span>
+          <button
+            class="rvt-switch rvt-switch--small"
+            data-switch="small-email-switch"
+            role="switch"
+            aria-checked="true"
+            aria-labelledby="small-1-label"
+          >
+            <span class="rvt-switch__on">On</span>
+            <span class="rvt-switch__off">Off</span>
+          </button>
+        </div>
+      </li>
+      <li>
+        <div class="rvt-display-flex rvt-vertical-center rvt-switch-demo">
+          <div class="rvt-m-right-lg" id="small-3-label">
+            <strong>Two-factor</strong> authentication
+            <a href="#" class="rvt-ts-14">What is this?</a>
+          </div>
+          <button
+            class="rvt-switch rvt-switch--small rvt-switch--success"
+            data-switch="small-two-factor-switch"
+            role="switch"
+            aria-checked="true"
+            aria-labelledby="small-3-label"
+          >
+            <span class="rvt-switch__on">On</span>
+            <span class="rvt-switch__off">Off</span>
+          </button>
+        </div>
+      </li>
+      <li>
+        <div class="rvt-display-flex rvt-vertical-center rvt-switch-demo">
+          <div class="rvt-m-right-lg" id="small-4-label">
+            Use my location
+          </div>
+          <button
+            class="rvt-switch rvt-switch--small rvt-switch--danger"
+            data-switch="small-location-switch"
+            role="switch"
+            aria-checked="true"
+            aria-labelledby="small-4-label"
+          >
+            <span class="rvt-switch__on">On</span>
+            <span class="rvt-switch__off">Off</span>
+          </button>
+        </div>
+      </li>
+    </ul>
+
+  </main>
+  <script src="./js/rivet-switch.js"></script>
+  <script>
+    Switch.init();
+
+    /**
+     * API demo stuff
+     *
+     * Run "Switch.on(myButton, myCallback)" in the console to see an
+     * example of how the API works.
+     */
+    var myButton = document.querySelector('[data-switch="email-switch"]');
+    const myCallback = () => {
+      alert('Yay, you switched it! 🎉');
+    }
+
+    /**
+    * Open the console to see the custom events fire
+    */
+
+    // Listen for a custom "On" event
+    document.addEventListener('switchOn', event => {
+      console.log(`Custom switch **ON** event triggered from: ${event.detail.name()}`);
+
+      if (event.detail.name() == 'email-switch') {
+        alert('Okay, we\'ll send you some emails! ❤️💌❤️')
+      }
+      // Maybe send some data via an AJAX request, etc...
+    }, false);
+
+    // Listen for a custom "Off" event
+    document.addEventListener('switchOff', event => {
+      console.log(`Custom switch **OFF** event triggered from: ${event.detail.name()}`);
+    }, false);
+  </script>
+</body>
+</html>

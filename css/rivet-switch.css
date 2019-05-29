@@ -1,0 +1,92 @@
+.rvt-switch {
+  align-items: center;
+  background: none;
+  background-color: #dddddd;
+  border: 0.125rem solid #cccccc;
+  border-radius: 0.25rem;
+  display: flex;
+  font-weight: 700;
+  height: 2.5rem;
+  line-height: 1.1;
+  padding: 0.25rem;
+  position: relative;
+  -webkit-appearance: none;
+}
+
+.rvt-switch:after {
+  background-color: #ffffff;
+  border-radius: 0.25rem;
+  content: " ";
+  height: 1.75rem;
+  left: 0.25rem;
+  position: absolute;
+  top: 0.25rem;
+  transition: transform .2s ease;
+  width: 2.25rem;
+}
+
+.rvt-switch:focus {
+  box-shadow: 0 0 0 0.125rem #ffffff, 0 0 0 0.25rem #006298;
+  outline: none;
+  transition: box-shadow .2s ease;
+}
+
+.rvt-switch[aria-checked="true"] {
+  background-color: #006298;
+  border-color: #006298;
+  color: #ffffff;
+}
+
+.rvt-switch[aria-checked="true"]:after {
+  transform: translate(2.75rem, 0);
+}
+
+.rvt-switch__on, .rvt-switch__off {
+  border-radius: 0.25rem;
+  padding: 0.4rem 0.5rem;
+  transition: all .2s ease;
+}
+
+.rvt-switch[aria-checked="true"] .rvt-switch__off {
+  visibility: hidden;
+}
+
+.rvt-switch[aria-checked="false"] .rvt-switch__on {
+  visibility: hidden;
+}
+
+.rvt-switch--danger[aria-checked="true"] {
+  background-color: #df3603;
+  border-color: #df3603;
+}
+
+.rvt-switch--success[aria-checked="true"] {
+  background-color: #008a28;
+  border-color: #008a28;
+}
+
+.rvt-switch--small {
+  height: 1.5rem;
+  padding: 0.125rem;
+}
+
+.rvt-switch--small:after {
+  height: 1rem;
+  left: 0.125rem;
+  top: 0.125rem;
+  width: 1.5rem;
+}
+
+.rvt-switch--small[aria-checked="true"]:after {
+  /**
+       * NOTE: This is a magic number to make spacing around the small switch
+       * "handle" appear optically the same on all sides.
+       */
+  transform: translate(2.1rem, 0);
+}
+
+.rvt-switch--small .rvt-switch__on,
+.rvt-switch--small .rvt-switch__off {
+  font-size: 0.875rem;
+  padding: 0.125rem 0.25rem;
+}
