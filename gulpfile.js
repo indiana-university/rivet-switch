@@ -1,16 +1,15 @@
-const gulp = require('gulp');
-const sass = require('gulp-sass');
-const browserSync = require('browser-sync').create();
-const header = require('gulp-header');
-const uglify = require('gulp-uglify');
-const rename = require('gulp-rename');
-const pump = require('pump');
-const autoprefixer = require('autoprefixer');
-const postcss = require('gulp-postcss');
-const cssnano = require('gulp-cssnano');
-const runSequence = require('run-sequence');
-const del = require('del');
-const package = require('./package.json');
+const { src, dest, series, watch } = require("gulp");
+const browserSync = require("browser-sync").create();
+const sass = require("gulp-sass");
+const header = require("gulp-header");
+const uglify = require("gulp-uglify");
+const rename = require("gulp-rename");
+const pump = require("pump");
+const autoprefixer = require("autoprefixer");
+const postcss = require("gulp-postcss");
+const cssnano = require("gulp-cssnano");
+const del = require("del");
+const package = require("./package.json");
 
 const banner = `/*!
  *
@@ -23,118 +22,145 @@ const banner = `/*!
 `;
 
 // Development server
-gulp.task('browser-sync', function () {
+function watchFiles(callback) {
   browserSync.init({
     server: {
       baseDir: "./docs"
     }
   });
+  watch("src/sass/**/*.scss", { ignoreInitial: false }, compileSass);
+  watch("src/js/**/*.js", { ignoreInitial: false }, compileJS);
+  watch("src/index.html", { ignoreInitial: false }, compileHTML);
 
-  gulp.watch('src/sass/**/*.scss', ['sass']);
-  gulp.watch('src/js/**/*.js', ['js']);
-  gulp.watch('src/index.html', ['html']);
-});
+  callback();
+}
 
-gulp.task('html', function() {
-  return gulp.src('src/index.html')
-    .pipe(gulp.dest('docs/'))
+// Headless development server
+function headless(callback) {
+  browserSync.init({
+    server: {
+      baseDir: "./docs"
+    },
+    open: false
+  });
+  watch("src/sass/**/*.scss", { ignoreInitial: false }, compileSass);
+  watch("src/js/**/*.js", { ignoreInitial: false }, compileJS);
+  watch("src/index.html", { ignoreInitial: false }, compileHTML);
+
+  callback();
+}
+
+function compileHTML() {
+  return src("src/index.html")
+    .pipe(dest("docs/"))
     .pipe(browserSync.stream());
-});
+}
 
-gulp.task('sass', function() {
-  return gulp.src('src/sass/**/*.scss')
-    .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
-    .pipe(gulp.dest('docs/css/'))
+function compileSass() {
+  return src("src/sass/**/*.scss")
+    .pipe(sass({ outputStyle: "expanded" }).on("error", sass.logError))
+    .pipe(dest("docs/css/"))
     .pipe(browserSync.stream());
-});
+}
 
-gulp.task('sass:release', function () {
-  return gulp.src('src/sass/**/*.scss')
-    .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
-    .pipe(gulp.dest('dist/css/'));
-});
+function sassProd() {
+  return src("src/sass/**/*.scss")
+    .pipe(sass({ outputStyle: "expanded" }).on("error", sass.logError))
+    .pipe(dest("dist/css/"));
+}
 
-gulp.task('css:clean', function () {
-  return del(['dist/css/**/*']);
-});
+function cleanCSS() {
+  return del(["dist/css/**/*"]);
+}
 
-gulp.task('css:minify', function () {
-  return gulp.src('dist/css/' + package.name + '.css')
+function minifyCSS() {
+  return src("dist/css/" + package.name + ".css")
     .pipe(cssnano())
-    .pipe(rename({
-      suffix: '.min'
-    }))
-    .pipe(gulp.dest('dist/css/'));
-});
+    .pipe(
+      rename({
+        suffix: ".min"
+      })
+    )
+    .pipe(dest("dist/css/"));
+}
 
-gulp.task('css:prefix', function () {
-  return gulp.src('dist/css/' + package.name + '.css')
-    .pipe(postcss([autoprefixer({ browsers: ['last 2 versions'] })]))
-    .pipe(gulp.dest('dist/css/'));
-});
+function prefixCSS() {
+  return src("dist/css/" + package.name + ".css")
+    .pipe(postcss([autoprefixer({ browsers: ["last 2 versions"] })]))
+    .pipe(dest("dist/css/"));
+}
 
-gulp.task('css:header', function () {
-  gulp.src('dist/css/' + package.name + '.css')
+function headerCSS(callback) {
+  src("dist/css/" + package.name + ".css")
     .pipe(header(banner, { package: package }))
-    .pipe(gulp.dest('dist/css/'));
+    .pipe(dest("dist/css/"));
 
-  gulp.src('dist/css/' + package.name + '.min.css')
+  src("dist/css/" + package.name + ".min.css")
     .pipe(header(banner, { package: package }))
-    .pipe(gulp.dest('dist/css/'));
-});
+    .pipe(dest("dist/css/"));
 
-gulp.task('css:release', function(done) {
-  runSequence('css:clean', 'sass:release', 'css:prefix', 'css:minify', 'css:header')
-});
+  callback();
+}
 
 // This task is used to watch durring development only.
-gulp.task('js', function() {
-  return gulp.src('src/js/**/*.js')
-    .pipe(gulp.dest('docs/js/'))
+
+function compileJS() {
+  return src("src/js/**/*.js")
+    .pipe(dest("docs/js/"))
     .pipe(browserSync.stream());
-});
+}
 
-gulp.task('js:clean', function () {
-  return del(['dist/js/**/*']);
-});
+function cleanJS() {
+  return del(["dist/js/**/*"]);
+}
 
-gulp.task('js:copy', function() {
-  return gulp.src('src/js/**/*.js')
-    .pipe(gulp.dest('dist/js/'));
-});
+function copyJS() {
+  return src("src/js/**/*.js").pipe(dest("dist/js/"));
+}
 
-gulp.task('js:minify', function (done) {
-  pump([
-    gulp.src('dist/js/' + package.name + '.js'),
-    uglify(),
-    rename({ suffix: '.min' }),
-    gulp.dest('dist/js')
-  ],
-    done
+function minifyJS(callback) {
+  pump(
+    [
+      src("dist/js/" + package.name + ".js"),
+      uglify(),
+      rename({ suffix: ".min" }),
+      dest("dist/js")
+    ],
+    callback
   );
-});
+}
 
-gulp.task('js:header', function () {
-  gulp
-    .src('dist/js/' + package.name + '.js')
+function headerJS(callback) {
+  src("dist/js/" + package.name + ".js")
     .pipe(header(banner, { package: package }))
-    .pipe(gulp.dest('dist/js/'));
+    .pipe(dest("dist/js/"));
 
-  gulp
-    .src('dist/js/' + package.name + '.min.js')
+  src("dist/js/" + package.name + ".min.js")
     .pipe(header(banner, { package: package }))
-    .pipe(gulp.dest('dist/js/'));
-});
+    .pipe(dest("dist/js/"));
 
-gulp.task('js:release', function(done) {
-  runSequence('js:clean', 'js:copy', 'js:minify', 'js:header', done);
-});
+  callback();
+}
 
 // Deletes everything in the dist/js and dist/css folders
-gulp.task('clean', ['css:clean', 'js:clean']);
+exports.clean = series(cleanCSS, cleanJS);
 
 // Run release tasks
-gulp.task('release', ['css:release', 'js:release']);
+exports.release = series(
+  cleanCSS,
+  sassProd,
+  prefixCSS,
+  minifyCSS,
+  headerCSS,
+  cleanJS,
+  copyJS,
+  minifyJS,
+  headerJS
+);
+
+exports.headless = headless;
+
+exports.buildDocs = series(compileHTML, compileSass, compileJS);
 
 // Default dev server
-gulp.task('default', ['browser-sync']);
+exports.default = watchFiles;
