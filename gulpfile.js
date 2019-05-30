@@ -1,14 +1,16 @@
 const { src, dest, series, watch } = require("gulp");
-const browserSync = require("browser-sync").create();
-const sass = require("gulp-sass");
-const header = require("gulp-header");
-const uglify = require("gulp-uglify");
-const rename = require("gulp-rename");
-const pump = require("pump");
 const autoprefixer = require("autoprefixer");
-const postcss = require("gulp-postcss");
+const browserSync = require("browser-sync").create();
 const cssnano = require("gulp-cssnano");
 const del = require("del");
+const eslint = require("gulp-eslint");
+const header = require("gulp-header");
+const postcss = require("gulp-postcss");
+const pump = require("pump");
+const rename = require("gulp-rename");
+const sass = require("gulp-sass");
+const uglify = require("gulp-uglify");
+
 const package = require("./package.json");
 
 const banner = `/*!
@@ -29,7 +31,7 @@ function watchFiles(callback) {
     }
   });
   watch("src/sass/**/*.scss", { ignoreInitial: false }, compileSass);
-  watch("src/js/**/*.js", { ignoreInitial: false }, compileJS);
+  watch("src/js/**/*.js", { ignoreInitial: false }, series(lintJSWatch, compileJS));
   watch("src/index.html", { ignoreInitial: false }, compileHTML);
 
   callback();
@@ -44,7 +46,7 @@ function headless(callback) {
     open: false
   });
   watch("src/sass/**/*.scss", { ignoreInitial: false }, compileSass);
-  watch("src/js/**/*.js", { ignoreInitial: false }, compileJS);
+  watch("src/js/**/*.js", { ignoreInitial: false }, series(lintJSWatch, compileJS));
   watch("src/index.html", { ignoreInitial: false }, compileHTML);
 
   callback();
@@ -103,6 +105,18 @@ function headerCSS(callback) {
 }
 
 // This task is used to watch durring development only.
+function lintJSBuild() {
+  return src(["src/js/**/*.js", "!node_modules/**"])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+}
+
+function lintJSWatch() {
+  return src(["src/js/**/*.js", "!node_modules/**"])
+    .pipe(eslint())
+    .pipe(eslint.format());
+}
 
 function compileJS() {
   return src("src/js/**/*.js")
@@ -152,6 +166,7 @@ exports.release = series(
   prefixCSS,
   minifyCSS,
   headerCSS,
+  lintJSBuild,
   cleanJS,
   copyJS,
   minifyJS,
@@ -160,7 +175,7 @@ exports.release = series(
 
 exports.headless = headless;
 
-exports.buildDocs = series(compileHTML, compileSass, compileJS);
+exports.buildDocs = series(compileHTML, compileSass, lintJSBuild, compileJS);
 
 // Default dev server
 exports.default = watchFiles;
