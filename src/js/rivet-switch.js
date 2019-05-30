@@ -12,6 +12,7 @@
   } else {
     root.Switch = factory(root);
   }
+  // eslint-disable-next-line no-unused-vars
 })(typeof global !== 'undefined' ? global : typeof window !== 'undefined' ? window : this, function (window) {
 
   'use strict';
