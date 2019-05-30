@@ -3,6 +3,5 @@ module.exports = {
   'env': {
     'commonjs': true,
     'amd': true
-
   }
 }
