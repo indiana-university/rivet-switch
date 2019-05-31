@@ -1,4 +1,4 @@
-const { src, dest, series, watch } = require("gulp");
+const { dest, series, src, watch } = require("gulp");
 const autoprefixer = require("autoprefixer");
 const browserSync = require("browser-sync").create();
 const cssnano = require("gulp-cssnano");
@@ -9,6 +9,7 @@ const postcss = require("gulp-postcss");
 const pump = require("pump");
 const rename = require("gulp-rename");
 const sass = require("gulp-sass");
+const stylelint = require("gulp-stylelint");
 const uglify = require("gulp-uglify");
 
 const package = require("./package.json");
@@ -30,7 +31,7 @@ function watchFiles(callback) {
       baseDir: "./docs"
     }
   });
-  watch("src/sass/**/*.scss", { ignoreInitial: false }, compileSass);
+  watch("src/sass/**/*.scss", { ignoreInitial: false }, series(lintSassWatch, compileSass));
   watch("src/js/**/*.js", { ignoreInitial: false }, series(lintJSWatch, compileJS));
   watch("src/index.html", { ignoreInitial: false }, compileHTML);
 
@@ -45,7 +46,7 @@ function headless(callback) {
     },
     open: false
   });
-  watch("src/sass/**/*.scss", { ignoreInitial: false }, compileSass);
+  watch("src/sass/**/*.scss", { ignoreInitial: false }, series(lintSassWatch, compileSass));
   watch("src/js/**/*.js", { ignoreInitial: false }, series(lintJSWatch, compileJS));
   watch("src/index.html", { ignoreInitial: false }, compileHTML);
 
@@ -56,6 +57,25 @@ function compileHTML() {
   return src("src/index.html")
     .pipe(dest("docs/"))
     .pipe(browserSync.stream());
+}
+
+function lintSassWatch() {
+  return src("src/sass/**/*.scss")
+  .pipe(stylelint({
+    failAfterError: false,
+    reporters: [
+      {formatter: 'string', console: true}
+    ]
+  }));
+}
+
+function lintSassBuild() {
+  return src("src/sass/**/*.scss")
+  .pipe(stylelint({
+    reporters: [
+      {formatter: 'string', console: true}
+    ]
+  }));
 }
 
 function compileSass() {
@@ -162,6 +182,7 @@ exports.clean = series(cleanCSS, cleanJS);
 // Run release tasks
 exports.release = series(
   cleanCSS,
+  lintSassBuild,
   sassProd,
   prefixCSS,
   minifyCSS,
@@ -175,7 +196,7 @@ exports.release = series(
 
 exports.headless = headless;
 
-exports.buildDocs = series(compileHTML, compileSass, lintJSBuild, compileJS);
+exports.buildDocs = series(compileHTML, lintSassBuild, compileSass, lintJSBuild, compileJS);
 
 // Default dev server
 exports.default = watchFiles;
