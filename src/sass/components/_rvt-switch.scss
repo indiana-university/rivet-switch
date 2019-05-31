@@ -15,7 +15,7 @@
   position: relative;
   -webkit-appearance: none;
 
-  &:after {
+  &::after {
     background-color: $color-background;
     border-radius: $xxs;
     content: " ";
@@ -39,7 +39,7 @@
     color: $color-background;
   }
 
-  &[aria-checked="true"]:after {
+  &[aria-checked="true"]::after {
     transform: translate($xl + $xxs, 0);
   }
 
@@ -48,14 +48,6 @@
     border-radius: $xxs;
     padding: ($xxs + .15) $xs;
     transition: all .2s ease;
-  }
-
-  &[aria-checked="true"] &__off {
-    visibility: hidden;
-  }
-
-  &[aria-checked="false"] &__on {
-    visibility: hidden;
   }
 
   &--danger[aria-checked="true"] {
@@ -72,14 +64,14 @@
     height: $md;
     padding: $xxs/2;
 
-    &:after {
+    &::after {
       height: $sm;
       left: $xxs/2;
       top: $xxs/2;
       width: $md;
     }
 
-    &[aria-checked="true"]:after {
+    &[aria-checked="true"]::after {
       /**
        * NOTE: This is a magic number to make spacing around the small switch
        * "handle" appear optically the same on all sides.
@@ -92,5 +84,13 @@
   &--small &__off {
     font-size: $ts-14;
     padding: $xxs/2 $xxs;
+  }
+
+  &[aria-checked="true"] &__off {
+    visibility: hidden;
+  }
+
+  &[aria-checked="false"] &__on {
+    visibility: hidden;
   }
 }
