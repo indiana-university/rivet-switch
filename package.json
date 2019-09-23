@@ -25,7 +25,7 @@
   "devDependencies": {
     "autoprefixer": "^8.5.0",
     "browser-sync": "^2.26.7",
-    "cypress": "^3.4.0",
+    "cypress": "^3.4.1",
     "del": "^3.0.0",
     "eslint-config-rivet": "^1.0.0",
     "gh-pages": "^2.0.1",
