@@ -8,7 +8,7 @@ Switch components are based on their real-life counterparts &mdash; physical swi
 
 Switches do not behave the same as checkboxes. Checkboxes are generally used in the context of a form and separate the act of selection from the execution of the chosen selection. Switches are typically standalone components which combine selection and execution into a single step. For these reasons, switches should not be used within a form.
 
-For more information please see [Checkbox vs Toggle Switch](https://uxplanet.org/checkbox-vs-toggle-switch-7fc6e83f10b8) on [Medium](https://medium.com/).
+For more information please see [Checkbox vs Toggle Switch](https://uxplanet.org/checkbox-vs-toggle-switch-7fc6e83f10b8).
 
 ## Getting started
 The Rivet switch add-on requires the use of the core Rivet CSS. You can find out more about how to get started in [the Rivet documentation](https://rivet.iu.edu/components/). Once you are using Rivet, you can download the Rivet switch source files and include them in your project.
