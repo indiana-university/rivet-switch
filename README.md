@@ -3,6 +3,13 @@ An accessible switch component for Rivet
 
 [Download Rivet switch](https://github.com/indiana-university/rivet-switch/archive/master.zip) | [View the demo](https://indiana-university.github.io/rivet-switch/)
 
+## Notes about usage
+Switch components are based on their real-life counterparts &#151; physical switches. Physical switches close or open a circuit to create states of "on" or "off", respectively. As a result, switch components should feature the text "On" and "Off", with any additional context being provided by a label.
+
+Switches do not behave the same as checkboxes. Checkboxes are generally used in the context of a form and separate the act of selection from the execution of the chosen selection. Switches are typically standalone components which combine selection and execution into a single step. For these reasons, switches should not be used within a form.
+
+For more information please see [Checkbox vs Toggle Switch](https://uxplanet.org/checkbox-vs-toggle-switch-7fc6e83f10b8) on [Medium](https://medium.com/).
+
 ## Getting started
 The Rivet switch add-on requires the use of the core Rivet CSS. You can find out more about how to get started in [the Rivet documentation](https://rivet.iu.edu/components/). Once you are using Rivet, you can download the Rivet switch source files and include them in your project.
 
