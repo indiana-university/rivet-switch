@@ -1,6 +1,6 @@
 {
   "name": "rivet-switch",
-  "version": "0.3.2-rc.74",
+  "version": "0.3.2-rc.78",
   "description": "An accessible switch component for Rivet",
   "license": "BSD-3-Clause",
   "repository": {
