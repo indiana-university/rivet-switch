@@ -39,7 +39,7 @@
     "gulp-stylelint": "^9.0.0",
     "gulp-uglify": "^3.0.0",
     "pump": "^3.0.0",
-    "rivet-uits": "^1.6.0",
+    "rivet-uits": "^1.7.1",
     "stylelint-config-rivet": "^1.0.0"
   },
   "dependencies": {}
