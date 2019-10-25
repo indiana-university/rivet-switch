@@ -13,7 +13,7 @@
   -webkit-appearance: none;
 }
 
-.rvt-switch:after {
+.rvt-switch::after {
   background-color: #ffffff;
   border-radius: 0.25rem;
   content: " ";
@@ -37,7 +37,7 @@
   color: #ffffff;
 }
 
-.rvt-switch[aria-checked="true"]:after {
+.rvt-switch[aria-checked="true"]::after {
   transform: translate(2.75rem, 0);
 }
 
@@ -45,14 +45,6 @@
   border-radius: 0.25rem;
   padding: 0.4rem 0.5rem;
   transition: all .2s ease;
-}
-
-.rvt-switch[aria-checked="true"] .rvt-switch__off {
-  visibility: hidden;
-}
-
-.rvt-switch[aria-checked="false"] .rvt-switch__on {
-  visibility: hidden;
 }
 
 .rvt-switch--danger[aria-checked="true"] {
@@ -70,14 +62,14 @@
   padding: 0.125rem;
 }
 
-.rvt-switch--small:after {
+.rvt-switch--small::after {
   height: 1rem;
   left: 0.125rem;
   top: 0.125rem;
   width: 1.5rem;
 }
 
-.rvt-switch--small[aria-checked="true"]:after {
+.rvt-switch--small[aria-checked="true"]::after {
   /**
        * NOTE: This is a magic number to make spacing around the small switch
        * "handle" appear optically the same on all sides.
@@ -89,4 +81,12 @@
 .rvt-switch--small .rvt-switch__off {
   font-size: 0.875rem;
   padding: 0.125rem 0.25rem;
+}
+
+.rvt-switch[aria-checked="true"] .rvt-switch__off {
+  visibility: hidden;
+}
+
+.rvt-switch[aria-checked="false"] .rvt-switch__on {
+  visibility: hidden;
 }
