@@ -154,8 +154,8 @@ jobs:
       - run:
           name: Publish docs to gh-pages
           command: |
-            git config --global user.email "$GIT_COMMITTER_EMAIL"
-            git config --global user.name "$GIT_COMMITTER_NAME"
+            git config --global user.email "iubot@iu.edu"
+            git config --global user.name "iubot"
             npm run deploy
 
 workflows:

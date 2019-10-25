@@ -3,7 +3,7 @@
  * Copyright (C) 2018 The Trustees of Indiana University
  * SPDX-License-Identifier: BSD-3-Clause
 
- * rivet-switch - @version 0.3.1
+ * rivet-switch - @version 0.3.2-rc.82
  */
 
 /**
@@ -20,6 +20,7 @@
   } else {
     root.Switch = factory(root);
   }
+  // eslint-disable-next-line no-unused-vars
 })(typeof global !== 'undefined' ? global : typeof window !== 'undefined' ? window : this, function (window) {
 
   'use strict';
@@ -43,7 +44,7 @@
       }
     });
 
-    // Distpatch the event
+    // Dispatch the event
     element.dispatchEvent(event);
   }
 
@@ -78,7 +79,7 @@
     // Get the switch's "checked" state e.g. "true" or "False"
     var switchState = toggleButton.getAttribute('aria-checked');
 
-    // If the swithch is off, set the checked state to "true"
+    // If the switch is off, set the checked state to "true"
     if (switchState === 'false') {
       switchOn(toggleButton);
     } else {
