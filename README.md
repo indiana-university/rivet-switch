@@ -1,3 +1,5 @@
+> The Rivet 1 switch add-on is deprecated. Please use the [Rivet 2 switch component](https://rivet.iu.edu/components/switch/) instead.
+
 # rivet-switch
 An accessible switch component for Rivet
 
